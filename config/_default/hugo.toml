@@ -1,0 +1,23 @@
+baseURL = "https://blog.jinosoft.com/"
+defaultContentLanguage = "ko"
+locale = "ko-KR"
+title = "Jino Blog"
+theme = "blowfish"
+
+enableRobotsTXT = true
+summaryLength = 0
+
+[permalinks]
+  posts = "/posts/:slug/"
+
+[pagination]
+  pagerSize = 100
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  author = "authors"
+  series = "series"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

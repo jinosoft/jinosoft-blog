@@ -1,0 +1,9 @@
+error:
+  404_home: "홈으로 돌아가기"
+
+nav:
+  close_menu: "메뉴 닫기"
+  footer_menu: "푸터 메뉴"
+  main_menu: "주 메뉴"
+  mobile_menu: "모바일 메뉴"
+  toggle_submenu: "하위 메뉴 열기/닫기"

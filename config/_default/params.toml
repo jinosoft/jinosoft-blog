@@ -1,0 +1,37 @@
+colorScheme = "blowfish"
+defaultAppearance = "light"
+autoSwitchAppearance = true
+
+enableSearch = true
+enableCodeCopy = true
+
+[header]
+  layout = "basic"
+
+[footer]
+  showMenu = true
+  showCopyright = true
+  showThemeAttribution = true
+  showAppearanceSwitcher = true
+  showScrollToTop = true
+
+[homepage]
+  layout = "profile"
+  showRecent = true
+  showRecentItems = 5
+  showMoreLink = true
+  showMoreLinkDest = "/posts/"
+
+[article]
+  showDate = true
+  showAuthor = true
+  showHeadingAnchors = true
+  showPagination = true
+  showReadingTime = true
+  showWordCount = true
+
+[list]
+  groupByYear = true
+
+[sitemap]
+  excludedKinds = ["taxonomy", "term"]
