@@ -2,7 +2,7 @@ disabled = false
 locale = "ko-KR"
 label = "한국어"
 weight = 1
-title = "Jino Blog"
+title = "JinoSoft Blog"
 
 [params]
   displayName = "KO"
@@ -11,4 +11,4 @@ title = "Jino Blog"
   dateFormat = "2006년 1월 2일"
 
   [params.author]
-    name = "Jino"
+    name = "JinoSoft"

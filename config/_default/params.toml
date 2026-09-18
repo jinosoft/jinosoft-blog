@@ -28,7 +28,7 @@ enableCodeCopy = true
   showHeadingAnchors = true
   showPagination = true
   showReadingTime = true
-  showWordCount = true
+  showWordCount = false
 
 [list]
   groupByYear = true

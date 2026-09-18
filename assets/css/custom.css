@@ -1,0 +1,44 @@
+body.max-w-7xl {
+  max-width: 80rem;
+}
+
+article {
+  width: fit-content;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#single_header,
+.article-content,
+article > footer.max-w-prose {
+  max-width: 96ch;
+}
+
+article > section.prose {
+  max-width: none;
+}
+
+article > section.prose > div.min-w-0 {
+  width: 100%;
+  max-width: min(96ch, 100%);
+}
+
+@media (min-width: 1024px) {
+  body.max-w-7xl {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  article > section.prose > .lg\:ms-auto {
+    margin-left: 3rem;
+  }
+
+  article > section.prose > .lg\:ps-8 {
+    padding-left: 0;
+  }
+
+  article > section.prose > .lg\:max-w-2xs {
+    max-width: 20rem;
+  }
+}
