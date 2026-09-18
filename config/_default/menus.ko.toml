@@ -7,3 +7,13 @@
   name = "소개"
   pageRef = "about"
   weight = 20
+
+[[footer]]
+  name = "개인정보처리방침"
+  pageRef = "privacy"
+  weight = 10
+
+[[footer]]
+  name = "문의"
+  pageRef = "contact"
+  weight = 20
