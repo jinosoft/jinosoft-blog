@@ -1,5 +1,5 @@
 [[main]]
-  name = "글"
+  name = "글 목록"
   pageRef = "posts"
   weight = 10
 
@@ -9,11 +9,16 @@
   weight = 20
 
 [[footer]]
+  name = "글 목록"
+  pageRef = "posts"
+  weight = 10
+
+[[footer]]
   name = "개인정보처리방침"
   pageRef = "privacy"
-  weight = 10
+  weight = 20
 
 [[footer]]
   name = "문의"
   pageRef = "contact"
-  weight = 20
+  weight = 30

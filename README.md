@@ -1,5 +1,7 @@
 # JinoSoft Blog
 
+블로그 글, 이미지, 사용자 정의 설정의 저작권 및 이용 조건은 [COPYRIGHT.md](COPYRIGHT.md)를 참고하세요. `themes/blowfish`와 같은 외부 구성요소는 각자의 라이선스를 따릅니다.
+
 한국어 개인 기술 블로그. Hugo 0.165.0 Extended와 Blowfish 테마를 사용합니다.
 
 - 사이트: https://blog.jinosoft.com/
