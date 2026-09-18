@@ -51,12 +51,20 @@ GitHub Free 개인 계정에서는 GitHub Pages를 **Public 저장소에서만**
 
 ## 3. 로컬 프로젝트를 GitHub에 올리기
 
-Hugo 프로젝트 디렉터리에서 Git 저장소를 초기화하고 GitHub 원격 저장소를 연결한다.
+아직 Git 저장소로 관리하지 않는 Hugo 프로젝트라면 프로젝트 디렉터리에서 Git 저장소를 초기화하고 GitHub 원격 저장소를 연결한다.
 
 ```bash
 git init
 git branch -M main
 git remote add origin https://github.com/jinosoft/jinosoft-blog.git
+git add .
+git commit -m "Initial Hugo blog setup"
+git push -u origin main
+```
+
+이미 `git init`과 원격 저장소 연결을 완료한 프로젝트라면 초기화 명령을 다시 실행할 필요 없이 다음처럼 변경 사항만 commit하고 push한다.
+
+```bash
 git add .
 git commit -m "Initial Hugo blog setup"
 git push -u origin main
@@ -68,7 +76,7 @@ HTTPS 방식으로 push하면 GitHub 사용자 이름과 Personal Access Token�
 
 ### Personal Access Token 권한
 
-Fine-grained token을 만들 때는 저장소 접근 범위를 블로그 저장소로 제한하는 것이 좋다. 일반적인 소스 push에는 저장소의 Contents 권한이 필요하다.
+Fine-grained token을 만들 때는 저장소 접근 범위를 블로그 저장소로 제한하는 것이 좋다. 일반적인 소스 push에는 저장소의 Contents 권한이 필요하다. 아래 권한은 이 글에서처럼 소스와 GitHub Actions 워크플로 파일을 함께 처음 push하는 상황을 기준으로 한다.
 
 저장소 선택 후 Permissions에서는 `Contents`를 `Read and write`로 설정한다. `.github/workflows/` 아래의 워크플로 파일을 push하거나 수정하려면 `Workflows`도 `Read and write`로 설정해야 한다. 계정 권한은 이 작업에 필요하지 않으므로 최소 권한 원칙에 따라 추가하지 않는다.
 
@@ -128,7 +136,7 @@ GitHub Pages 설정 화면의 Custom domain에 사용할 도메인을 입력한�
 blog.jinosoft.com
 ```
 
-저장하면 저장소에 `CNAME` 파일이 생성되거나, 기존 `CNAME` 파일의 내용이 해당 도메인으로 설정된다. Hugo 설정의 `baseURL`도 실제 주소와 일치하도록 지정한다.
+저장하면 GitHub Pages 설정과 배포 방식에 따라 저장소의 `CNAME` 파일이 생성되거나, 배포 결과에 커스텀 도메인이 반영된다. 이미 `CNAME` 파일이 있다면 내용이 해당 도메인과 일치하는지 확인한다. Hugo 설정의 `baseURL`도 실제 주소와 일치하도록 지정한다.
 
 ```toml
 baseURL = "https://blog.jinosoft.com/"
