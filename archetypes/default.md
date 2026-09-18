@@ -5,5 +5,5 @@ slug = '{{ .File.ContentBaseName }}'
 title = '{{ replace .File.ContentBaseName "-" " " | title }}'
 description = ''
 tags = []
-categories = []
+categories = ['IT개발']
 +++

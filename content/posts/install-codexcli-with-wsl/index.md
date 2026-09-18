@@ -5,7 +5,7 @@ draft = false
 slug = 'install-codexcli-with-wsl'
 description = 'WSL2와 Ubuntu에 Codex CLI를 설치하고, Windows npm 경로 문제부터 ChatGPT 로그인, 모델 선택, 상태 표시줄과 세션 복원까지 구성한 기록.'
 tags = ['wsl', 'ubuntu', 'codex', 'nodejs']
-categories = ['개발환경']
+categories = ['IT개발']
 showTableOfContents = true
 +++
 
