@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">JinoSoft favicon</title>
+  <desc id="desc">A white J optically centered on a deep-indigo rounded square.</desc>
+  <rect width="256" height="256" rx="48" fill="#312E81"/>
+  <path transform="translate(124 130) scale(1.35) translate(-128 -140)"
+        d="M126 84h40v78c0 24-12 35-35 35-20 0-32-9-38-27l31-14c2 5 4 7 8 7 3 0 4-2 4-7V84Z"
+        fill="#FFFFFF"/>
+</svg>
