@@ -9,19 +9,66 @@ article {
   margin-right: auto;
 }
 
+#main-content > article:not([class]) {
+  width: 100%;
+  min-width: 0;
+}
+
+#main-content > section.space-y-10.w-full {
+  width: 100%;
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#main-content > section.space-y-10.w-full > article.article-link--simple {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 #single_header,
 .article-content,
 article > footer.max-w-prose {
-  max-width: 96ch;
+  width: 100%;
+  max-width: min(96ch, 100%);
 }
 
 article > section.prose {
-  max-width: none;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 article > section.prose > div.min-w-0 {
   width: 100%;
   max-width: min(96ch, 100%);
+}
+
+article > section.prose > .lg\:ms-auto {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.article-content {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.article-content pre,
+.article-content table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.article-content table {
+  display: block;
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
 }
 
 @media (min-width: 1024px) {
