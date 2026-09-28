@@ -5,7 +5,7 @@
     "@type": "WebSite",
     "@id": {{ site.Home.Permalink | safeURL }},
     "name": "{{ .Site.Title | safeJS }}",
-    "alternateName": ["Jinosoft Blog", "지노소프트"],
+    "alternateName": ["JinoSoft Blog", "지노소프트"],
     {{ with .Site.Params.description }}"description": "{{ . | safeJS }}",{{ end }}
     {{ with .Site.Language.Locale }}"inLanguage": "{{ . }}",{{ end }}
     "url": {{ site.Home.Permalink | safeURL }},

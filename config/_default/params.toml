@@ -4,7 +4,7 @@ autoSwitchAppearance = true
 
 enableSearch = true
 enableCodeCopy = true
-description = "지노소프트(Jinosoft)의 기술 블로그입니다. 개발 경험과 IT 도구의 활용 방법, 설정 과정과 문제 해결 사례를 기록합니다."
+description = "지노소프트(JinoSoft)의 기술 블로그입니다. 개발 경험과 IT 도구의 활용 방법, 설정 과정과 문제 해결 사례를 기록합니다."
 
 [header]
   layout = "basic"
