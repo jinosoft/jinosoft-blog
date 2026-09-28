@@ -66,6 +66,25 @@ article > section.prose > .lg\:ms-auto {
   display: block;
 }
 
+.article-content .table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.article-content .table-scroll table {
+  display: table;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+  overflow: visible;
+}
+
+.article-content .table-scroll th,
+.article-content .table-scroll td {
+  white-space: nowrap;
+}
+
 .article-content img {
   max-width: 100%;
   height: auto;

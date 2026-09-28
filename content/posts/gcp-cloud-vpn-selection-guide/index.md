@@ -109,11 +109,13 @@ HA VPN은 10Gbps와 같은 고정 대역폭 상품이 아니다. 터널당 한�
 
 ### 월 비용 비교
 
+{{< table-scroll label="월 비용 비교 표" >}}
 | 구성 | 대역폭 또는 처리량 기준 | 고정 비용 | 데이터 전송 비용 | Google Cloud 예상 합계 | 원화 참고 |
 | --- | --- | ---: | ---: | ---: | ---: |
 | HA VPN 2개 터널 | 고정 대역폭 없음, 터널당 약 1~3Gbps | `$109.50` | `$389.12` | **`$498.62`** | 약 698,068원 |
 | Partner Interconnect 10Gbps 2개 | 각 VLAN attachment 10Gbps, 이중화 | `$3,445.60` | `$86.02` | **`$3,531.62`** | 약 4,944,262원 |
 | Dedicated Interconnect 10Gbps 2개 | 각 회선 10Gbps, 이중화 | `$3,544.88` | `$86.02` | **`$3,630.90`** | 약 5,083,254원 |
+{{< /table-scroll >}}
 
 Partner와 Dedicated의 Google Cloud 고정 비용 차이는 약 `$99.28`이다. Partner는 10Gbps VLAN attachment 비용에 통신사 서비스 비용이 포함되지 않고, Dedicated는 Google Cloud 포트 비용 외에 콜로케이션, 물리 회선, cross-connect, 라우터 운영 비용이 포함되지 않는다. 따라서 실제 구매 비용은 Google Cloud 청구액만으로 판단할 수 없다. [Partner Interconnect 공식 안내](https://docs.cloud.google.com/network-connectivity/docs/interconnect/concepts/partner-overview)도 서비스 제공업체 비용이 별도라고 설명한다.
 
@@ -166,10 +168,12 @@ VLAN 용량을 낮추면 시간당 attachment 비용은 줄어든다. 하지만 
 
 Partner Interconnect는 VLAN attachment 용량을 1Gbps로 선택할 수 있다. Dedicated Interconnect는 10Gbps 또는 100Gbps 회선으로 연결할 수 있으며, 이 글의 비교에서는 10Gbps 회선 2개를 기준으로 한다. 월 평균 트래픽이 약 6.7Mbps이고 순간 트래픽도 1Gbps를 넘지 않는다면, Partner는 각 attachment를 1Gbps로 낮춰 Dedicated 10Gbps보다 작은 비용으로 구성할 수 있다. 아래는 두 방식 모두 2개 연결로 이중화하고, 앞의 시나리오와 같은 월 2TiB를 전송한다고 가정한 계산이다. Partner Interconnect의 1Gbps attachment 단가는 시간당 `$0.2778`이다.
 
+{{< table-scroll label="Partner 1Gbps와 Dedicated 10Gbps 비용 비교 표" >}}
 | 구성 | GCP 고정 비용 | 데이터 전송 비용 | Google Cloud 예상 합계 | 원화 참고 |
 | --- | ---: | ---: | ---: | ---: |
 | Partner Interconnect 1Gbps 2개 | `$405.59` | `$86.02` | **`$491.61`** | 약 688,254원 |
 | Dedicated Interconnect 10Gbps 2개 | `$3,544.88` | `$86.02` | **`$3,630.90`** | 약 5,083,254원 |
+{{< /table-scroll >}}
 
 이 조건에서는 Partner 1Gbps 2개의 Google Cloud 비용이 Dedicated 10Gbps 2개보다 약 `$3,139` 낮다. 단, 한 경로가 장애를 일으키면 남은 attachment 하나로 처리해야 하므로 이 예시는 장애 시 최대 1Gbps까지 처리하면 되는 환경에 적합하다. 또한 Partner 서비스 제공업체 비용은 별도이며, VLAN 용량을 1Gbps로 낮춰도 통신사 비용이 같은 비율로 줄어든다는 보장은 없다.
 

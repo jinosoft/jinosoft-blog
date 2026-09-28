@@ -1,0 +1,4 @@
+{{- $label := .Get "label" | default "가로로 스크롤할 수 있는 표" -}}
+<div class="table-scroll" role="region" aria-label="{{ $label }}" tabindex="0">
+  {{- .Page.RenderString .Inner -}}
+</div>

@@ -2,7 +2,7 @@
 title = '문의'
 date = '2026-09-18T00:00:00+09:00'
 draft = false
-description = 'JinoSoft Blog 문의'
+description = '지노소프트 기술 블로그 문의'
 +++
 
 블로그 글, 기술 내용, 오류 제보, 기타 문의는 이메일로 연락할 수 있습니다.

@@ -1,7 +1,7 @@
 baseURL = "https://blog.jinosoft.com/"
 defaultContentLanguage = "ko"
 locale = "ko-KR"
-title = "JinoSoft Blog"
+title = "지노소프트 기술 블로그"
 theme = "blowfish"
 
 enableRobotsTXT = true

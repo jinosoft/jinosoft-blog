@@ -1,8 +1,8 @@
 # 저작권 안내
 
-Copyright (c) 2026 JinoSoft. All rights reserved.
+Copyright (c) 2026 Jinosoft. All rights reserved.
 
-이 저장소에 포함된 다음 콘텐츠의 저작권은 별도 표시가 없는 한 JinoSoft에 있습니다.
+이 저장소에 포함된 다음 콘텐츠의 저작권은 별도 표시가 없는 한 Jinosoft에 있습니다.
 
 - 블로그 글과 문서
 - 캡처 이미지와 기타 이미지
