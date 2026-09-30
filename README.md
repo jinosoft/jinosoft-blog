@@ -1,4 +1,4 @@
-# 지노소프트 기술 블로그 (JinoSoft Blog)
+# 지노소프트 기술 블로그 (Jinosoft Blog)
 
 블로그 글, 이미지, 사용자 정의 설정의 저작권 및 이용 조건은 [COPYRIGHT.md](COPYRIGHT.md)를 참고하세요. `themes/blowfish`와 같은 외부 구성요소는 각자의 라이선스를 따릅니다.
 
