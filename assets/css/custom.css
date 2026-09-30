@@ -144,6 +144,36 @@ article > section.prose > .lg\:ms-auto {
   height: auto;
 }
 
+.article-content .logo-format-demo {
+  margin: 1.5rem 0;
+  padding: 0 16px;
+  color: #111827;
+  background: #fff;
+  border: 1px solid #dce2e9;
+}
+
+.article-content .logo-format-demo-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 114px;
+  align-items: center;
+  gap: 12px;
+  min-height: 70px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.article-content .logo-format-demo-row + .logo-format-demo-row {
+  border-top: 1px solid #dce2e9;
+}
+
+.article-content .logo-format-demo img {
+  display: block;
+  width: 114px;
+  height: 50px;
+  max-width: none;
+  margin: 0;
+}
+
 @media (min-width: 1024px) {
   body.max-w-7xl {
     padding-left: 3rem;
