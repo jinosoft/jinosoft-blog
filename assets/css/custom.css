@@ -2,6 +2,60 @@ body.max-w-7xl {
   max-width: 80rem;
 }
 
+.main-menu .logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.main-menu .logo svg {
+  display: block;
+  width: 114px;
+  height: 50px;
+}
+
+.main-menu .blog-brand {
+  gap: 10px;
+}
+
+.main-menu .blog-brand-label {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.home-profile-title {
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+@media (max-width: 520px) {
+  .main-menu .logo svg {
+    width: 89px;
+    height: 39px;
+  }
+
+  .main-menu .blog-brand {
+    gap: 8px;
+  }
+
+  .main-menu .blog-brand-label {
+    font-size: 16px;
+  }
+
+  .home-profile-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 380px) {
+  .main-menu .blog-brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+}
+
 article {
   width: fit-content;
   max-width: 80rem;
