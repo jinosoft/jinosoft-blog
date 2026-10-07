@@ -9,7 +9,7 @@ categories = ['IT개발']
 showTableOfContents = true
 +++
 
-GitHub 저장소에 `.env`나 설정 파일을 올린 뒤, 그 안에 토큰이 들어 있었다는 사실을 발견했다. 파일을 지우고 다시 push하면 해결될까?
+GitHub 저장소에 올린 `.env`나 설정 파일에서 토큰을 발견했다면, 파일을 지우고 다시 push하는 것으로 해결될까?
 
 **아니다. 먼저 토큰을 폐기하거나 교체해야 한다.** 파일을 삭제한 새 커밋을 올려도 이전 커밋에는 값이 남을 수 있다. 이 글은 공개 저장소에 GitHub Personal Access Token(PAT) 또는 다른 서비스의 API 키를 올린 상황을 기준으로, 대응 순서를 정리한다. 실제 토큰을 사용한 실습은 하지 않는다.
 
@@ -30,7 +30,9 @@ GitHub PAT라면 GitHub의 `Settings > Developer settings > Personal access toke
 
 ![GitHub Fine-grained personal access tokens 목록에서 토큰을 삭제하는 버튼](token-delete.png)
 
-새 토큰은 필요한 저장소와 권한만 허용하고 만료일을 설정한다. 기존 토큰을 사용하던 로컬 도구나 자동화가 있다면 새 자격 증명으로 갱신한다. GitHub Actions에서 필요한 값은 코드에 직접 적지 말고 저장소의 Secrets에 보관하며, 워크플로에서 가능한 경우 기본 제공 `GITHUB_TOKEN` 사용도 검토한다. [GitHub: PAT 보안 권장사항](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+새 토큰은 필요한 저장소와 권한만 허용하고 만료일을 설정한다. 기존 토큰을 사용하던 로컬 도구나 자동화가 있다면 새 자격 증명으로 갱신한다.
+
+GitHub Actions에서 필요한 값은 코드에 직접 적지 말고 저장소의 Secrets에 보관하며, 워크플로에서 가능한 경우 기본 제공 `GITHUB_TOKEN` 사용도 검토한다. [GitHub: PAT 보안 권장사항](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
 > 토큰을 이미 폐기했더라도, 노출된 동안 사용됐을 가능성은 별도로 확인해야 한다.
 
@@ -48,7 +50,9 @@ GitHub의 secret scanning 경고가 있다면 감지된 위치와 상태를 확�
 git rm --cached -- .env
 ```
 
-`--cached`는 **로컬 파일은 남기고 Git의 추적 대상에서만 제거**한다. 따라서 로컬 `.env`에 남은 유출 토큰도 지우고, 필요한 경우 새 토큰으로 교체한다. 이어서 `.gitignore`에 `.env`를 추가하고 변경 사항을 커밋한다. 다른 설정값도 함께 들어 있는 파일이라면 파일 전체를 제외하는 대신 **비밀값만 제거**하고, 필요한 설정은 환경변수나 별도 비밀 저장소로 옮긴다. `.gitignore`는 앞으로의 실수를 줄여 주지만 **이미 커밋된 내용을 지우지는 않는다.** [Git: git-rm](https://git-scm.com/docs/git-rm), [GitHub: 저장소에서 민감정보 제거](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)
+`--cached`는 **로컬 파일은 남기고 Git의 추적 대상에서만 제거**한다. 로컬 `.env`의 유출 토큰도 지우거나 새 토큰으로 교체하고, `.gitignore`에 `.env`를 추가한 뒤 커밋한다. `.gitignore`는 **이미 커밋된 내용을 지우지는 않는다.** [Git: git-rm](https://git-scm.com/docs/git-rm), [GitHub: 저장소에서 민감정보 제거](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)
+
+공유해야 할 다른 설정도 들어 있는 파일이라면 파일 전체를 제외하는 대신 **비밀값만 제거**한다. 필요한 비밀값은 환경변수나 별도 비밀 저장소로 옮긴다.
 
 ## 4. Git 기록 삭제가 필요한지 판단한다
 

@@ -9,9 +9,9 @@ categories = ['IT개발']
 showTableOfContents = true
 +++
 
-Google Cloud의 HA VPN과 AWS의 Site-to-Site VPN을 연결해 두 클라우드 VPC 사이에 사설 네트워크 통신을 구성한 과정을 정리한다.
+Google Cloud와 AWS 사이에 VPN을 구성하면서, AWS VPN 연결 하나가 터널 두 개를 제공한다는 점을 기준으로 양쪽 리소스를 맞췄다. 이번 테스트에서는 AWS VPN 연결 두 개를 만들고 GCP HA VPN의 두 인터페이스에 총 네 개의 터널을 연결했다.
 
-이번 글에서는 Google Cloud의 HA VPN Gateway와 Cloud Router, AWS의 Virtual Private Gateway(VGW), Customer Gateway, 두 개의 Site-to-Site VPN 연결을 사용한다. AWS VPN 연결 하나에는 두 개의 터널이 생성되므로, 최종적으로 네 개의 VPN 터널과 네 개의 BGP 세션을 구성한다.
+HA VPN Gateway, Cloud Router, AWS Virtual Private Gateway(VGW), Customer Gateway를 만드는 순서와 외부 IP·BGP 주소의 대응 관계를 정리했다. 캡처는 현재 삭제된 테스트 환경의 기록이며, 실제 서비스 통신과 장애 전환 테스트는 별도 확인 항목으로 다룬다.
 
 ## 1. 최종 구성
 
@@ -166,7 +166,7 @@ Google Cloud 공식 문서에서는 AWS와의 HA VPN 구성에서 IKEv2를 사�
 
 ![두 번째 AWS Site-to-Site VPN 연결 생성 화면](19-aws-vpn-connection-2.png)
 
-두 번째 VPN 연결의 두 터널에도 각각 IKEv2와 사전 공유 키를 설정한다. 테스트 환경에서는 임시 키를 사용했지만, 운영 환경에서는 터널별로 서로 다른 강한 키를 사용한다.
+두 번째 VPN 연결의 두 터널에도 각각 IKEv2와 사전 공유 키를 설정한다. 키 관리 기준은 앞의 사전 확인 항목과 같다.
 
 ![두 번째 VPN 연결의 터널 1 옵션](20-aws-vpn-connection-2-tunnel-1.png)
 
@@ -176,7 +176,7 @@ Google Cloud 공식 문서에서는 AWS와의 HA VPN 구성에서 IKEv2를 사�
 
 ![두 번째 AWS VPN 연결 상세 정보](22-aws-vpn-connection-2-details.png)
 
-AWS Site-to-Site VPN 연결 하나가 두 개의 터널을 제공한다는 점을 이용해 두 VPN 연결을 만든 것이다. AWS 공식 문서에서도 VPN 연결 하나마다 두 개의 터널이 제공된다고 안내한다.
+이 시점에 두 VPN 연결의 외부 IP 네 개를 확보했다. 다음 단계에서는 이 값과 터널별 BGP 주소를 GCP에 입력한다.
 
 ## 8. AWS VPN 구성 파일에서 BGP 정보 확인
 
@@ -256,7 +256,7 @@ AWS 외부 IP와 인터페이스 번호를 잘못 연결하면 터널 상태가 
 
 ![네 번째 Google Cloud VPN 터널 설정](34-gcp-tunnel-4-edit.png)
 
-캡처는 삭제된 테스트 환경에서 임시로 사용한 키를 보여준다. 실제 운영 환경에서는 화면에 보이는 값을 재사용하지 않고, AWS에서 생성하거나 별도로 관리하는 강한 키를 터널별로 입력한다.
+각 터널의 키는 대응하는 AWS 터널의 키와 같아야 한다. 캡처의 임시 값 대신 자신의 구성에서 발급한 키를 입력한다.
 
 ## 11. Cloud Router에 BGP 세션 구성
 
@@ -323,7 +323,7 @@ nc -vz <REMOTE_PRIVATE_IP> <PORT>
 
 Google Cloud 공식 문서도 VPN Gateway의 외부 IP를 ping하는 것은 터널을 통한 통신 테스트가 아니며, 양쪽 네트워크의 실제 시스템 사설 IP를 이용해 확인해야 한다고 안내한다. [Cloud VPN 문제 해결 문서](https://docs.cloud.google.com/network-connectivity/docs/vpn/support/troubleshooting)
 
-고가용성을 확인하려면 네 개 중 하나의 터널을 일시적으로 중단한 뒤 통신이 계속되는지 확인한다. 테스트가 끝난 후에는 터널을 원래 상태로 복구한다.
+추가로 고가용성을 검증하려면, 테스트 환경에서 터널 하나를 일시적으로 중단한 뒤 통신이 계속되는지 확인한다. 테스트가 끝나면 원래 상태로 복구한다. 이 글의 캡처에는 실제 사설 IP 통신과 장애 전환 테스트 결과는 포함되어 있지 않다.
 
 ## 14. 문제가 발생할 때 확인할 순서
 
@@ -371,7 +371,7 @@ VPN 연결은 사용 시간과 데이터 전송량에 따라 비용이 발생할
 
 Google Cloud HA VPN과 AWS Virtual Private Gateway를 연결하려면 한쪽의 VPN Gateway만 만드는 것으로 끝나지 않는다. 양쪽에 Customer Gateway와 VPN 연결을 구성하고, AWS에서 생성된 네 개의 외부 터널 IP와 내부 BGP 주소를 Google Cloud에 정확히 반영해야 한다.
 
-이번 구성에서는 다음 순서로 연결을 완성했다.
+캡처에 기록한 구성 순서는 다음과 같다.
 
 ```text
 Cloud Router 생성
@@ -393,8 +393,6 @@ VPN 터널 4개 생성
 Cloud Router BGP 세션 4개 구성
   ↓
 AWS 라우팅 전파 활성화
-  ↓
-사설 IP 통신과 장애 전환 확인
 ```
 
-실제 운영 환경에서는 테스트 캡처의 IP, 리소스 ID, 사전 공유 키를 재사용하지 않고, 각 환경에서 새로 생성한 값과 강한 인증 정보를 사용해야 한다.
+여기까지는 터널과 라우팅 설정의 기록이다. 운영에 적용하기 전에는 사설 IP 통신과 터널 장애 시의 동작까지 별도로 검증해야 한다. 테스트 캡처의 IP, 리소스 ID, 사전 공유 키는 재사용하지 않는다.

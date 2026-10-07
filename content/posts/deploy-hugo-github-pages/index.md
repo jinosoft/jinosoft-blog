@@ -9,9 +9,9 @@ categories = ['IT개발']
 showTableOfContents = true
 +++
 
-Hugo로 만든 블로그를 GitHub Pages에 배포하고 `https://blog.jinosoft.com` 커스텀 도메인으로 연결한 과정을 정리한다.
+Hugo 블로그 소스를 GitHub에 올린 뒤에도 사이트는 바로 열리지 않았다. 처음에는 워크플로 파일을 push할 토큰 권한이 부족했고, 그다음에는 Pages 설정 때문에 Actions가 실패했다.
 
-이 글에서는 GitHub 저장소 준비부터 GitHub Actions 자동 배포, Cafe24 DNS 설정, HTTPS 활성화까지 실제 진행 순서에 맞춰 설명한다.
+두 문제를 해결하고 Cafe24 DNS와 HTTPS를 설정해 `https://blog.jinosoft.com`으로 연결했다. 저장소 생성부터 자동 배포와 도메인 연결까지 실제 진행 순서대로 정리한다.
 
 ## 1. 사용 환경과 최종 결과
 
@@ -82,14 +82,14 @@ Fine-grained token을 만들 때는 저장소 접근 범위를 블로그 저장�
 
 ![Fine-grained Personal Access Token의 Contents와 Workflows 권한 설정 화면](github_push_token_permissions.PNG)
 
-GitHub Actions 워크플로 파일을 함께 push할 때 다음 오류가 발생할 수 있다.
+처음 워크플로 파일을 함께 push했을 때는 다음 권한 오류로 거부됐다.
 
 ```text
 refusing to allow a Personal Access Token to create or update workflow
 without workflow scope
 ```
 
-이 경우 토큰에 Actions 워크플로 파일을 수정할 수 있는 권한을 추가하거나, 워크플로 파일을 별도 방식으로 반영해야 한다. 토큰은 발급 직후 안전한 곳에 보관하고, 저장소나 글의 코드 블록에 기록하지 않는다.
+토큰에 워크플로 파일을 수정할 수 있는 권한을 추가한 뒤 다시 push하자 업로드가 성공했다. 위 오류의 `workflow scope`는 classic PAT의 권한 표현이다. Fine-grained token에서는 앞서 설명한 `Workflows` 권한을 확인한다. 토큰 값은 저장소나 글에 기록하지 않는다.
 
 ## 4. GitHub Actions로 자동 배포 구성
 
@@ -106,7 +106,7 @@ GitHub Pages는 저장소의 소스 파일을 그대로 보여주는 방식이 �
 
 워크플로 파일에는 Hugo Extended 버전을 사용하도록 지정해야 한다. Blowfish 테마와 사용자 정의 CSS를 사용하는 경우 Extended 버전이 필요할 수 있다.
 
-배포가 실패하면 Actions의 실행 결과에서 `build` 단계와 `deploy` 단계를 확인한다. 처음 설정할 때는 Pages가 아직 활성화되지 않아 `configure-pages` 단계에서 Pages site를 찾지 못하는 오류가 발생할 수 있다. 이 경우 저장소 설정에서 Pages의 빌드 소스를 GitHub Actions로 지정한 뒤 다시 실행한다.
+push는 성공했지만 첫 Actions 실행은 `configure-pages` 단계에서 실패했다. `Get Pages site failed`라는 오류였고, 저장소의 Pages 빌드 소스를 GitHub Actions로 지정한 뒤 다시 실행해 해결했다. 다음 단계의 Pages 설정까지 완료해야 배포할 수 있다.
 
 ## 5. GitHub Pages 활성화
 
@@ -167,7 +167,7 @@ https://blog.jinosoft.com
 https://blog.jinosoft.com/posts/install-codexcli-with-wsl/
 ```
 
-## 8. 자주 발생한 문제와 해결 방법
+## 8. 접속되지 않을 때 확인할 순서
 
 ### GitHub Pages 주소가 404인 경우
 
@@ -175,14 +175,6 @@ https://blog.jinosoft.com/posts/install-codexcli-with-wsl/
 - Settings > Pages에서 Source가 GitHub Actions인지 확인한다.
 - 커스텀 도메인과 `baseURL`이 일치하는지 확인한다.
 - 배포가 완료된 뒤 브라우저 캐시와 DNS 반영 시간을 고려한다.
-
-### Actions에서 Pages site를 찾지 못하는 경우
-
-저장소의 Pages 설정이 아직 활성화되지 않았거나, 배포 방식이 GitHub Actions로 선택되지 않은 상태일 수 있다. Pages 설정을 먼저 저장하고 워크플로를 다시 실행한다.
-
-### PAT 권한 오류가 발생하는 경우
-
-워크플로 파일을 push할 때 토큰에 필요한 Actions 관련 권한이 없으면 거부될 수 있다. 토큰 권한을 확인하고, 토큰 자체를 코드나 로그에 남기지 않도록 주의한다.
 
 ### DNS 설정 후에도 접속되지 않는 경우
 
@@ -240,6 +232,6 @@ git push origin main
 
 ## 마무리
 
-Hugo 프로젝트를 GitHub 저장소에 올리고 GitHub Actions를 연결하면 글을 push하는 것만으로 자동 배포할 수 있다. 여기에 커스텀 도메인과 HTTPS를 추가하면 GitHub Pages의 기본 주소 대신 개인 블로그에 적합한 주소를 사용할 수 있다.
+최종적으로 `main`에 push하면 Hugo 빌드와 Pages 배포가 자동으로 진행되고, 커스텀 도메인으로 글을 볼 수 있는 상태가 됐다.
 
-실제 설정에서는 GitHub Pages 활성화, Personal Access Token 권한, DNS 전파 시간에서 문제가 가장 많이 발생했다. 각 단계를 한 번에 진행하기보다 Actions 결과와 DNS 상태를 확인하면서 순서대로 진행하면 원인을 찾기 쉽다.
+이번 설정에서 기억할 점은 **push 성공과 배포 성공은 다르다**는 것이다. 404가 보이면 DNS만 기다리기보다 Actions 실행 결과와 Pages 설정부터 확인한다.

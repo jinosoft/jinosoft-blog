@@ -9,12 +9,14 @@ categories = ['IT개발']
 showTableOfContents = true
 +++
 
-Google Cloud에서 온프레미스 데이터센터나 다른 클라우드와 사설 네트워크를 연결하는 방법은 크게 두 가지다.
+GCP와 외부 데이터센터를 연결할 때 VPN으로 시작할지, 전용 연결을 사용할지 고민하게 된다. 특히 Partner Interconnect가 Dedicated보다 얼마나 저렴한지는 용량과 포함된 비용을 맞춰 봐야 알 수 있다.
+
+비교할 연결 방식은 크게 두 가지다.
 
 - 공개 인터넷을 경유하는 IPsec 기반 **Cloud VPN**
 - 전용 회선 또는 통신사를 이용하는 **Cloud Interconnect**
 
-Cloud VPN은 빠르고 저렴하게 시작할 수 있고, Cloud Interconnect는 높은 처리량과 예측 가능한 네트워크 품질에 적합하다. 이 글에서는 두 방식을 같은 조건으로 비교해 어떤 상황에서 무엇을 선택할지 정리한다.
+서울 리전에서 국내 IDC로 월 2TiB를 전송하는 가정을 두고 계산했다. **10Gbps에서는 Partner와 Dedicated의 GCP 청구액 차이가 작지만, 1Gbps로 충분하다면 Partner의 고정 비용을 크게 낮출 수 있다.** 단, 통신사와 물리 회선 비용은 별도다.
 
 가격은 **2026년 9월 23일 Google Cloud 공식 가격 문서를 확인한 기준**이다. 가격은 변경될 수 있으므로 실제 구성 전에는 [Network Connectivity 가격표](https://cloud.google.com/network-connectivity/pricing#interconnect-pricing)와 [VPC 네트워크 가격표](https://cloud.google.com/vpc/network-pricing?hl=ko)를 다시 확인해야 한다.
 
@@ -99,13 +101,13 @@ Cloud Router 자체는 무료이며, BGP 제어 트래픽에 일반적인 네트
 
 아래 모든 시간당 비용은 **월 평균 730시간 기준**으로 계산한다. 실제 청구액은 해당 월의 실제 사용 시간과 적용 중인 할인에 따라 달라질 수 있다.
 
-여기서 `asia-northeast3`은 Google Cloud 서울 리전이며, `asia-northeast3-a/b/c`는 해당 리전 안의 영역(zone)이다. 이 글에서 말하는 연결 대상은 Google Cloud 밖에 있는 국내 온프레미스·코로케이션 데이터센터다. AWS 서울 리전과 같은 다른 클라우드에 연결하는 경우에는 Cloud VPN 또는 Cross-Cloud/Partner Cross-Cloud Interconnect의 별도 가격표를 적용해야 하므로, 아래 Interconnect 금액을 그대로 적용하면 안 된다. GCP 내부 서울 리전의 VM이나 다른 VPC를 연결하는 경우에도 이 Cloud VPN 비용 시나리오를 그대로 적용하지 않는다.
+연결 대상은 Google Cloud 밖의 국내 온프레미스·코로케이션 데이터센터다. AWS 서울 리전 등 다른 클라우드에는 Cloud VPN 또는 Cross-Cloud/Partner Cross-Cloud Interconnect의 해당 가격표를 확인해야 하며, 아래 Interconnect 금액을 그대로 적용하지 않는다. GCP 내부 VM·VPC 사이의 연결도 이 시나리오와 다르다.
 
-월 2TiB를 730시간에 균등하게 나눈 평균 처리량은 약 6.7Mbps다. 이 글에서 Interconnect를 10Gbps로 통일한 것은 월간 평균 트래픽을 맞추기 위한 것이 아니라, 같은 회선 용량을 기준으로 Partner와 Dedicated의 비용을 비교하기 위해서다. 두 Interconnect 구성 모두 각 VLAN attachment 또는 회선을 10Gbps로 설정하고 이중화한다.
+월 2TiB의 평균 처리량은 약 6.7Mbps다. 먼저 Partner와 Dedicated를 각 연결 10Gbps로 맞춰 비교하고, 이후 1Gbps로 충분한 경우를 따로 계산한다. 필요한 용량은 평균값만 아니라 순간 피크와 한 경로의 장애까지 고려해 정한다.
 
 HA VPN은 10Gbps와 같은 고정 대역폭 상품이 아니다. 터널당 한도는 패킷 크기에 따라 약 1~3Gbps이며, 2개 터널을 구성해도 10Gbps 처리량이 보장되는 것은 아니다. 따라서 아래 표에서 HA VPN은 10Gbps 대체 상품이 아니라, 같은 데이터 전송량을 기준으로 한 저비용 기준선으로 표시한다.
 
-이 시나리오는 Google Cloud에서 실제로 제공하는 가격 예시를 바탕으로 단순화한 것이다. 아래 2개 연결 구성은 99.9% 가용성 수준의 비교이며, 99.99% 운영 토폴로지는 별도로 설명한다. Interconnect는 실제로 파트너나 회선 사업자 비용이 추가되므로 아래 표는 Google Cloud 청구액 중심의 비교다.
+아래 Interconnect 구성은 99.9% 가용성 수준의 비교다. 99.99% 토폴로지에 필요한 연결 수는 표 아래에서 별도로 설명한다.
 
 ### 월 비용 비교
 
@@ -177,7 +179,7 @@ Partner Interconnect는 VLAN attachment 용량을 1Gbps로 선택할 수 있다.
 
 이 조건에서는 Partner 1Gbps 2개의 Google Cloud 비용이 Dedicated 10Gbps 2개보다 약 `$3,139` 낮다. 단, 한 경로가 장애를 일으키면 남은 attachment 하나로 처리해야 하므로 이 예시는 장애 시 최대 1Gbps까지 처리하면 되는 환경에 적합하다. 또한 Partner 서비스 제공업체 비용은 별도이며, VLAN 용량을 1Gbps로 낮춰도 통신사 비용이 같은 비율로 줄어든다는 보장은 없다.
 
-10Gbps 기준의 Google Cloud 청구액은 Partner Interconnect가 Dedicated Interconnect보다 약 `$99.28` 낮을 뿐이다. 이 차이는 Partner Interconnect의 통신사 서비스 비용을 포함하지 않은 결과이므로, Partner를 가격 절감 목적으로 선택할 수 있다는 의미는 아니다. 실제 견적에서는 통신사 비용까지 포함하면 Partner가 Dedicated보다 비싸질 수도 있다.
+핵심은 **필요한 용량을 낮춰 선택할 수 있느냐**다. 10Gbps끼리 비교한 결과와 1Gbps로 충분한 환경의 결과를 구분해서 봐야 한다.
 
 #### Dedicated Interconnect 계산
 
@@ -194,7 +196,7 @@ Dedicated Interconnect는 고정 비용이 크지만 높은 처리량과 직접 
 
 ## 5. 비용표를 어떻게 해석할까
 
-10Gbps 회선끼리 비교하면 Google Cloud 청구액은 거의 비슷하다. 그러나 이 표는 Partner의 통신사 비용과 Dedicated의 콜로케이션·물리 회선·cross-connect 비용을 제외한 값이다. HA VPN은 고정 10Gbps 상품이 아니므로 두 Interconnect와 같은 대역폭 비교 대상으로 해석하면 안 된다. 실제로는 다음 순서로 판단해야 한다.
+표의 합계는 전체 구축 견적이 아니라 Google Cloud 청구액이다. 이 전제에서 필요한 용량과 회선 운영 방식을 함께 판단한다.
 
 ### 10Gbps에서 Partner와 Dedicated 선택
 
@@ -267,10 +269,6 @@ BGP와 고가용성이 필요한가?
 
 ## 마무리
 
-Cloud VPN은 낮은 초기 비용과 빠른 구축이 장점이고, Cloud Interconnect는 높은 처리량과 안정적인 연결 품질이 장점이다.
+이 가정에서는 HA VPN으로 고정 비용을 작게 시작할 수 있다. 전용 연결이 필요하더라도 1Gbps로 충분하다면 Partner를 검토할 이유가 있고, 10Gbps가 필요하면 직접 회선을 운영할 수 있는지까지 판단해야 한다.
 
-신규 운영 환경에서는 HA VPN과 Cloud Router를 기본으로 검토한다. Classic VPN은 BGP를 지원하지 않는 레거시 장비와의 연결처럼 제한적인 상황에서만 사용한다.
-
-비용만 보면 같은 트래픽에서도 결과가 달라질 수 있다. Cloud VPN은 고정 비용이 낮지만 데이터 전송 비용과 터널당 처리량 한도를 함께 봐야 하고, Interconnect는 데이터 전송 단가가 낮아질 수 있지만 회선과 연결의 고정 비용이 발생한다. 10Gbps급 회선이 필요하면 Partner와 Dedicated를 같은 용량으로 비교하되, Partner를 자동으로 저렴한 선택지로 보면 안 된다. 콜로케이션과 물리 회선 운영이 가능하면 Dedicated를, 통신사 관리형 연결이 필요하면 Partner를 검토하는 방식이 적절하다.
-
-이 글의 비교표는 서울 리전의 VPC와 GCP 외부 국내 IDC 사이에 월 2TiB를 전송하는 예시다. 실제 운영에서는 게이트웨이 리전, 피어 위치, 터널 수, 파트너 비용, 회선 구성, 세금을 반영해 다시 계산해야 한다. 특히 Cloud VPN은 목적지가 국내인지 해외인지에 따라 인터넷 아웃바운드 단가가 달라진다.
+실제 견적은 표의 Google Cloud 비용에 통신사·시설·장비 비용을 더해서 비교한다. 연결 대상이나 리전, 전송량이 다르면 데이터 전송 요금부터 다시 계산해야 한다.

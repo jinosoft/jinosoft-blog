@@ -9,9 +9,9 @@ categories = ['IT개발']
 showTableOfContents = true
 +++
 
-누군가 내 GitHub 블로그 저장소를 fork했다. 그 사람이 글과 캡처 이미지를 그대로 가져가 자기 사이트에 올려도 될까? 사용자 정의 CSS와 Blowfish 테마는 같은 조건일까?
+누군가 내 GitHub 블로그 저장소를 fork한다면, 글과 캡처 이미지를 그대로 가져가 자기 사이트에 올려도 될까? 사용자 정의 CSS와 Blowfish 테마는 같은 조건일까?
 
-실제 [Jinosoft 블로그 저장소](https://github.com/jinosoft/jinosoft-blog)는 `Public`이지만 루트에 오픈소스 `LICENSE`를 두지 않았다. 직접 만든 콘텐츠의 이용 조건은 [COPYRIGHT.md](https://github.com/jinosoft/jinosoft-blog/blob/main/COPYRIGHT.md)에 적었다. 아래에서 이 저장소를 사례로 살펴본다.
+이 블로그를 GitHub Pages로 공개하면서 확인한 질문이다. [Jinosoft 블로그 저장소](https://github.com/jinosoft/jinosoft-blog)는 `Public`이지만 루트에 오픈소스 `LICENSE`를 두지 않았다. 직접 만든 콘텐츠의 이용 조건은 [COPYRIGHT.md](https://github.com/jinosoft/jinosoft-blog/blob/main/COPYRIGHT.md)에 적었다. 이 저장소를 사례로 공개 범위와 재사용 허가의 차이를 살펴본다.
 
 ![Public 표시와 COPYRIGHT.md가 보이는 Jinosoft 블로그 저장소의 파일 목록](github-public-repository.png)
 

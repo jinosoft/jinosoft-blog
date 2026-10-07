@@ -9,11 +9,11 @@ categories = ['IT개발']
 showTableOfContents = true
 +++
 
-오픈소스를 상용 제품에 쓰면 안 될까? MIT는 출처 표시 없이 써도 될까? GPL은 사용만 해도 소스를 공개해야 할까?
+MIT 코드를 넣은 제품은 소스를 비공개로 배포할 수 있을까? GPL 코드를 사용한 경우에도 같을까? 두 라이선스 모두 상용 이용이 가능하지만, 배포물에 포함해야 할 고지와 소스 제공 범위는 다르다.
 
 이 글에서 비교하는 **0BSD, MIT, BSD-3-Clause, Apache-2.0, MPL-2.0, GPL-3.0, AGPL-3.0은 모두 상용 이용과 유료 배포를 허용한다.** 무료로 배포해야 하는 라이선스도 아니다. 차이는 **배포 시 무엇을 함께 제공해야 하는가**에 있다. [Open Source Initiative FAQ](https://opensource.org/faq), [GNU GPL FAQ](https://www.gnu.org/licenses/gpl-faq.en.html#DoesTheGPLAllowMoney)
 
-아래 내용은 각 라이선스의 기본 조건을 요약한 것이다. 실제 사용 시에는 해당 프로젝트의 라이선스 **버전**, 예외 조항, 함께 포함된 다른 구성요소를 확인해야 한다.
+아래 표로 기본 조건을 비교하고, 소스를 비공개로 유지하고 싶은 경우와 GPL 코드가 꼭 필요한 경우의 선택 기준을 살펴본다. 실제 사용 시에는 프로젝트의 라이선스 **버전**, 예외 조항, 함께 포함된 구성요소도 확인한다.
 
 ## 라이선스별 의무 비교
 
@@ -35,7 +35,7 @@ showTableOfContents = true
 
 ## 꼭 알아둘 차이
 
-**0BSD와 MIT는 다르다.** 0BSD는 저작권·라이선스 문구를 계속 포함하라는 조건이 없다. MIT는 그 문구를 배포물에 포함해야 한다. 둘 다 상용 이용과 유료 배포가 가능하고 소스 제공 의무는 없다. [0BSD 원문](https://opensource.org/license/0bsd), [MIT 원문](https://opensource.org/license/mit)
+**MIT의 고지는 단순한 출처 링크가 아니다.** 배포물에 저작권 표시와 허가문을 포함해야 한다. 0BSD에는 이 고지 유지 조건이 없다. [0BSD 원문](https://opensource.org/license/0bsd), [MIT 원문](https://opensource.org/license/mit)
 
 **Apache-2.0은 MIT보다 확인할 항목이 많다.** 라이선스 사본을 전달하고, 원본에 `NOTICE`가 있으면 해당 고지를 유지하며, 수정한 파일에는 변경 사실을 표시해야 한다. 기여자의 특허 허여 조건도 명시한다. [Apache-2.0 원문](https://www.apache.org/licenses/LICENSE-2.0.html)
 
@@ -66,4 +66,4 @@ showTableOfContents = true
 2. 배포한다면 저작권·라이선스 문구, `NOTICE`, 수정 표시, 소스 제공 조건을 확인한다.
 3. 라이선스가 없는 공개 저장소는 자유롭게 재사용해도 된다는 뜻이 아니다. 허가가 불분명하면 사용 전에 권리자에게 확인한다. [GitHub 라이선스 안내](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
 
-0BSD, MIT, GPL 코드는 모두 유료 제품에 사용할 수 있다. 다만 배포할 때 0BSD는 고지 유지 의무가 없고, MIT는 저작권 표시와 허가문을 포함해야 하며, GPL 적용 프로그램은 대응 소스까지 제공해야 한다. **같은 오픈소스라도 배포 전에 할 일은 이렇게 다르다.**
+제품 소스를 비공개로 유지하려면 고지 의무가 있는지와 별개로 **소스 제공을 요구하는 범위**부터 확인한다. GPL 코드가 꼭 필요하다면 배포할 프로그램의 대응 소스까지 준비할 수 있는지 검토한 뒤 선택한다.
