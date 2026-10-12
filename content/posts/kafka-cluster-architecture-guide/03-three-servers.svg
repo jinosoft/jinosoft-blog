@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480" role="img" aria-labelledby="title desc">
+  <title id="title">Three combined Kafka servers</title>
+  <desc id="desc">S1, S2 and S3 each run one broker and one controller. Two communicating controllers form a majority of three.</desc>
+  <rect width="480" height="480" fill="#ffffff"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="24" y="16" width="432" height="120" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+    <text x="240" y="47" font-size="25" font-weight="700" fill="#111827">Server S1</text>
+    <rect x="44" y="65" width="188" height="50" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="138" y="97" font-size="23" fill="#075985">Broker B1</text>
+    <rect x="248" y="65" width="188" height="50" rx="4" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+    <text x="342" y="97" font-size="22" fill="#166534">Controller C1</text>
+    <rect x="24" y="156" width="432" height="120" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+    <text x="240" y="187" font-size="25" font-weight="700" fill="#111827">Server S2</text>
+    <rect x="44" y="205" width="188" height="50" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="138" y="237" font-size="23" fill="#075985">Broker B2</text>
+    <rect x="248" y="205" width="188" height="50" rx="4" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+    <text x="342" y="237" font-size="22" fill="#166534">Controller C2</text>
+    <rect x="24" y="296" width="432" height="120" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+    <text x="240" y="327" font-size="25" font-weight="700" fill="#111827">Server S3</text>
+    <rect x="44" y="345" width="188" height="50" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="138" y="377" font-size="23" fill="#075985">Broker B3</text>
+    <rect x="248" y="345" width="188" height="50" rx="4" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+    <text x="342" y="377" font-size="22" fill="#166534">Controller C3</text>
+    <text x="240" y="457" font-size="23" fill="#166534">Controller majority: 2 of 3</text>
+  </g>
+</svg>

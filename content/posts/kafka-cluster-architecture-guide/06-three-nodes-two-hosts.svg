@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="450" viewBox="0 0 480 450" role="img" aria-labelledby="title desc">
+  <title id="title">Three combined nodes on only two physical hosts</title>
+  <desc id="desc">Host S1 contains two combined Kafka nodes, B1 C1 and B2 C2. Host S2 contains B3 C3. Losing S1 leaves one controller and loses the majority. Losing S2 leaves two controllers.</desc>
+  <rect width="480" height="450" fill="#ffffff"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="24" y="16" width="432" height="226" rx="6" fill="#fff1f2" stroke="#b91c1c" stroke-width="2"/>
+    <text x="240" y="52" font-size="25" font-weight="700" fill="#991b1b">Physical host S1</text>
+    <rect x="44" y="76" width="392" height="60" rx="4" fill="#ffffff" stroke="#6b7280"/>
+    <text x="240" y="114" font-size="23" fill="#111827">Node 1: Broker B1 + Controller C1</text>
+    <rect x="44" y="156" width="392" height="60" rx="4" fill="#ffffff" stroke="#6b7280"/>
+    <text x="240" y="194" font-size="23" fill="#111827">Node 2: Broker B2 + Controller C2</text>
+    <rect x="24" y="266" width="432" height="126" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+    <text x="240" y="303" font-size="25" font-weight="700" fill="#111827">Physical host S2</text>
+    <rect x="44" y="318" width="392" height="52" rx="4" fill="#ffffff" stroke="#6b7280"/>
+    <text x="240" y="351" font-size="23" fill="#111827">Node 3: Broker B3 + Controller C3</text>
+    <text x="240" y="432" font-size="22" fill="#991b1b">Lose S1: only 1 of 3 controllers remains</text>
+  </g>
+</svg>
