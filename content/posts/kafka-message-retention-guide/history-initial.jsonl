@@ -1,0 +1,3 @@
+{"event":"sensor.reading","reading_id":"reading-001","value":10}
+{"event":"sensor.reading","reading_id":"reading-002","value":11}
+{"event":"sensor.reading","reading_id":"reading-003","value":12}
