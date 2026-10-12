@@ -1,0 +1,6 @@
+1:{"event":"delivery.requested","delivery_id":"delivery-001","phase":"initial"}
+2:{"event":"delivery.requested","delivery_id":"delivery-002","phase":"initial"}
+1:{"event":"delivery.requested","delivery_id":"delivery-003","phase":"initial"}
+2:{"event":"delivery.requested","delivery_id":"delivery-004","phase":"initial"}
+1:{"event":"delivery.requested","delivery_id":"delivery-005","phase":"initial"}
+2:{"event":"delivery.requested","delivery_id":"delivery-006","phase":"initial"}
