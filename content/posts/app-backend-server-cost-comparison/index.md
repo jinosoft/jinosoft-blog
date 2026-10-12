@@ -1,6 +1,6 @@
 +++
 title = '서버호스팅 vs 클라우드: VM 운영비와 5년 TCO 계산법'
-date = '2026-10-11T00:00:00+09:00'
+date = '2026-10-12T00:00:00+09:00'
 draft = false
 slug = 'app-backend-server-cost-comparison'
 description = '서버 구매·코로케이션, 물리 서버 임대, 클라우드 VM의 월 비용과 5년 기본요금을 비교한다. 물리 서버 한 대에서 VM 2–3개를 운영하는 비용 예시와 TCO에 추가할 항목을 정리한다.'
