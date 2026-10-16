@@ -1,7 +1,7 @@
 +++
 title = 'GCP VM 비용 줄이기: 소규모 백엔드 서버의 사양과 요금 선택'
 date = '2026-10-16T00:00:00+09:00'
-draft = true
+draft = false
 slug = 'gcp-vm-cost-optimization'
 description = 'GCP 서울 리전에서 소규모 앱·웹 백엔드용 VM 비용을 줄이는 방법을 정리한다. E2 커스텀 2vCPU·4GiB와 공유 코어 VM, HDD·Balanced SSD, 공인 IPv4, Standard 네트워크를 조합해 월 비용을 계산한다.'
 tags = ['gcp', 'compute-engine', 'custom-machine-type', 'vm', 'cost']
