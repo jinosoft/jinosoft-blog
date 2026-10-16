@@ -6,6 +6,7 @@ slug = 'cloud-vm-cost-comparison'
 description = '국내 리전의 2vCPU·8GB급 Linux VM 비용을 비교한다. GCP E2·N2, AWS T3·T3a·T4g, Azure B2as·D2as, 네이버클라우드 g2 SSD의 디스크·공인 IP 포함 유지비와 아웃바운드(이그레스) 트래픽별 월 비용을 계산한다.'
 tags = ['gcp', 'aws', 'azure', 'naver-cloud', 'vm', 'cost']
 categories = ['IT개발']
+showTableOfContents = true
 +++
 
 2vCPU·메모리 8GB 서버를 한 달 운영하면 어느 클라우드가 저렴할까? VM 요금만으로는 답하기 어렵다. 디스크·공인 IP를 더하고 인터넷 아웃바운드(이그레스) 트래픽을 늘려보면 예상 비용이 달라진다.
