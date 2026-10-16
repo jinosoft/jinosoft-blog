@@ -89,6 +89,10 @@ article > footer.max-w-prose {
   max-width: min(96ch, 100%);
 }
 
+#single_header h1 {
+  overflow-wrap: anywhere;
+}
+
 article > section.prose {
   width: 100%;
   min-width: 0;
@@ -137,6 +141,44 @@ article > section.prose > .lg\:ms-auto {
 .article-content .table-scroll th,
 .article-content .table-scroll td {
   white-space: nowrap;
+}
+
+.article-content .table-scroll--grouped th:first-child,
+.article-content .table-scroll--grouped td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  background: rgb(var(--color-neutral-100));
+  font-weight: 600;
+}
+
+.article-content .table-scroll--grouped td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid rgb(var(--color-neutral-300));
+  background: rgb(var(--color-neutral));
+}
+
+.article-content .table-scroll--grouped tbody tr:has([data-csp="gcp"]) td,
+.article-content .table-scroll--grouped tbody tr:has([data-csp="azure"]) td {
+  background: rgb(var(--color-neutral-100));
+}
+
+.article-content .table-scroll--grouped tbody tr:has(> td:first-child > strong) td {
+  border-top: 3px solid rgb(var(--color-neutral-400));
+}
+
+.dark .article-content .table-scroll--grouped td {
+  background: rgb(var(--color-neutral-900));
+  border-bottom-color: rgb(var(--color-neutral-700));
+}
+
+.dark .article-content .table-scroll--grouped th:first-child,
+.dark .article-content .table-scroll--grouped tbody tr:has([data-csp="gcp"]) td,
+.dark .article-content .table-scroll--grouped tbody tr:has([data-csp="azure"]) td {
+  background: rgb(var(--color-neutral-800));
 }
 
 .article-content img {
