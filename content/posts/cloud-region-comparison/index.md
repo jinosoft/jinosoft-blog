@@ -1,7 +1,7 @@
 +++
 title = 'AWS·Azure·GCP·네이버클라우드 리전 비교: 전 세계 어디에 배포할 수 있을까?'
 date = '2026-10-16T00:00:00+09:00'
-draft = true
+draft = false
 slug = 'cloud-region-comparison'
 description = 'AWS·Azure·GCP·네이버클라우드의 전 세계 리전 수와 권역별 분포, 한국 리전을 비교한다. 운영 목록과 개설 예정·별도 클라우드를 구분하고 리전과 가용 영역의 차이 및 선택 기준을 정리한다.'
 tags = ['aws', 'azure', 'gcp', 'naver-cloud', 'region', 'availability-zone']
