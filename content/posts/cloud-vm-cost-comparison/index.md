@@ -1,7 +1,7 @@
 +++
 title = 'GCP·AWS·Azure·네이버클라우드 VM 비용 비교: 서버 요금부터 이그레스까지'
-date = '2026-10-12T00:00:00+09:00'
-draft = true
+date = '2026-10-16T00:00:00+09:00'
+draft = false
 slug = 'cloud-vm-cost-comparison'
 description = '국내 리전의 2vCPU·8GB급 Linux VM 비용을 비교한다. GCP E2·N2, AWS T3·T3a·T4g, Azure B2as·D2as, 네이버클라우드 g2 SSD의 디스크·공인 IP 포함 유지비와 아웃바운드(이그레스) 트래픽별 월 비용을 계산한다.'
 tags = ['gcp', 'aws', 'azure', 'naver-cloud', 'vm', 'cost']
